@@ -1,0 +1,432 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <link rel="stylesheet" href="style.css">
+    <title>GEDCOM APP</title>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="description" content="CHANGE ME">
+    <meta name="keywords" content="CHANGE ME">
+    <meta name="author" content="CHANGE ME">
+    <!-- Load jquery, bootstrap -->
+    <script src="https://code.jquery.com/jquery-3.3.1.min.js" integrity="sha256-FgpCb/KJQlLNfOu91ta32o/NMZxltwRo8QtmkMRdAu8=" crossorigin="anonymous"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js" integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q" crossorigin="anonymous"></script>
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js" integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl" crossorigin="anonymous"></script>
+    <!-- Custom CSS -->
+    <link rel="stylesheet" type="text/css" href="/style.css">
+    
+    <!-- Custom CSS End -->
+</head>
+    
+<body>
+    <script src="index.js"></script>
+<div class="pos-f-t">
+    <div class="collapse" id="navbarToggleExternalContent">
+    <div class="bg-dark p-4">
+      <span class="text-muted">
+            <ul>
+                <li><a href="#flp" class = "li1">File-Log-Panel </a></li>
+                <li><a href="#s-panel">Status Panel</a></li>
+                <li><a href="#container2">Create Gedcom</a></li>
+                <li><a href="#addIndTitle">Add Individual</a></li>
+                         
+          </ul>
+        </span>
+    </div>
+  </div>
+  <nav class="navbar navbar-dark bg-dark">
+      <a class="navbar-brand" href="#">
+        <img src="bar.jpg" alt="Logo" style="width:70px;">
+    
+        </a>
+    <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarToggleExternalContent" aria-            controls="navbarToggleExternalContent" aria-expanded="false" aria-label="Toggle navigation">
+      <span class="navbar-toggler-icon"></span>
+        
+    </button>
+  </nav>
+</div>
+    
+    
+    <title>GEDCOM APP</title>
+    <div class = "container">
+        <div class = "sub-container">
+            <h1 class = "page-header">GEDCOM APP <small class="text-capitalize" class = "text-primary"> Get Geneoalogy Information with this powerful website</small></h1>
+                <br>
+
+            <img src = "tr4.jpg" width="120%" height="55%" alt = "Geneoalogy" align = "middle">
+            <hr>
+            </div>
+        
+        <div class = "lower-container">
+        
+            <p class = "info_title"><strong><em>INFORMATION</em></strong></p>
+            <textarea align class = "textArea1" disabled rows = "4" cols = "250">
+             
+                Select a file to upload and the website will process the information
+                Get Ancestry, Descendency, Create new Gedcom objects and much more...   
+            </textarea>
+        </div>
+        <br>
+        
+        <p> <em> <strong>Click The Button to  Choose a file</strong></em> </p>
+        <div class = "button-container">
+			
+         <form ref='uploadForm' 
+			  id='uploadForm' 
+			  action='/upload' 
+			  method='post' 
+			  encType="multipart/form-data">
+				<input type="file" name="uploadFile" id = "myFile" />
+				<input type='submit' value='Upload!' onclick = "return  validateFilename()">
+		</form>
+			
+        </div>
+        <br>
+        
+            <h3 id = "s-panel" class = "s-panel">
+                STATUS PANEL
+            </h3>
+        <div class = "status-panel">
+                
+            <textarea class = "status-panel-text-area" id = "statPanel" readonly rows = "6" cols = "150">
+            
+               
+            </textarea>
+        </div>
+        
+        <br>
+        <h4 id = "flp">
+            <strong>FILE LOG PANEL</strong>
+        
+        </h4>
+<div class  = "File-Log-Panel">
+        
+
+<table  id="customers" class = "tableClass" align = "center" height = "200%" width = "100%">
+
+  <thead>
+    <th>Filename<br>(Click to Download)</th>
+    <th>Source</th>
+    <th>GEDC Version</th>
+    <th>Encoding</th>
+    <th>Submitter Name</th>
+    <th>Submitter Address</th>
+    <th>Number of Individuals</th>
+    <th>Number of Families</th>
+      
+  </thead>
+  
+    </table> 
+            
+
+</div>
+        
+        <br><br><br>
+        <h5 class = "gvp"><strong> GEDCOM VIEW PANEL</strong></h5>
+        <div class = "Gedcom-View-Panel">
+        
+<table  id="customers" align = "center" height = "200%" width = "100%">
+  <thead>
+    <th>Given Name</th>
+    <th>Surname</th>
+    <th>Sex</th>
+    <th>Family Size</th>
+      
+  </thead>
+  
+    </table>
+            
+        </div>
+        <br>
+        
+        <div class="Menu-container">
+        
+            <p class = "menu-title">MENU</p>
+                <br>
+            
+            <div class="create-gedcom">
+            
+                <p class = "gedcom-title">Create Simple Gedcom </p>
+                    
+                        
+<div class="container2" id = "container2">
+  <form  action = "/Gedcom" name = "form1" onsubmit="return validateCreateGedcom()" >
+    <div class="row">
+      <div class="col-25">
+        <label for="fname">Header Source</label>
+      </div>
+      <div class="col-75">
+        <input type="text" id="fname_src" name="firstname" placeholder="Source.." method = "POST">
+      </div>
+        <div id = "Header_error"></div>
+        
+    </div>
+      
+    <div class="row">
+      <div class="col-25">
+        <label for="lname">Version</label>
+      </div>
+      <div class="col-75">
+        <input type="text" id="lname_src" name="Hversion" placeholder="Version.." method = "POST">
+      </div>
+        <div id = "version_error"></div>
+    </div>
+    <div class="row">
+      <div class="col-25">
+        <label for="country">Encoding</label>
+      </div>
+      <div class="col-75">
+        <select id="country" name="country">
+          <option value="ascii">ASCII</option>
+          <option value="ansel">ANSEL</option>
+          <option value="utf8">UTF8</option>
+          <option value = "unicode">UNICODE</option>
+        </select>
+      </div>
+             
+    </div>
+      
+    <div class="row">
+      <div class="col-25">
+        <label for="lname">Submitter Name</label>
+      </div>
+      <div class="col-75">
+        <input type="text" id="subLastName" name="sLastName" placeholder="Submitter Name.." method = "POST">
+      </div>
+              <div id = "sub_name_error"></div>
+    </div>  
+      
+    <div class="row">
+      <div class="col-25">
+        <label for="lname">Submitter Address</label>
+      </div>
+      <div class="col-75">
+        <input type="text" id="subAddr" name="subAddr" placeholder="Submitter Address.." method = "POST">
+          
+      </div>
+            <div id = "sub_add_error"></div>
+            <br><br>
+    </div>
+      
+    <div class="row">
+      <div class="col-25">
+        <label for="lname">Filename</label>
+      </div>
+      <div class="col-75">
+    <input type="text" id="Gfilename" name="filename_Gedcom" placeholder="Enter a filename.." method = "POST">
+          
+      </div>
+    <div id = "fname_add_error"></div>
+            <br><br>
+    </div>
+
+   
+    <div class="row">
+      <input type="submit" value="Submit"> 
+    </div>
+  </form>
+</div>
+                <br><br>
+                
+<p class = "addIndiTitle" id = "addIndTitle"><strong>Add an Individual</strong> </p>      
+<div class="addIndiPanel">
+<form action="/createIndiv" name = "form2" onsubmit="return validateSubmitIndi()">
+    <div class="row">
+      <div class="col-25">
+        <label for="fname">First Name</label>
+      </div>
+      <div class="col-75">
+        <input type="text" id="fnameIndi1" name= "firstname_indi" placeholder="First Name.." method = "POST" >
+      </div>
+        <div id = "fname_indi_error"></div>  
+    </div>
+               
+      <div class="row">
+      <div class="col-25">
+        <label for="lname">Last Name</label>
+      </div>
+      <div class="col-75">
+        <input type="text" id="lnameIndi" name="lastname_indi" placeholder="Last Name.." method = "POST" >
+      </div>
+        <div id = "lname_indi_error"></div>
+    </div>
+               
+    
+       <div class="row">
+      <div class="col-25">
+        <label for="country">File Name</label>
+      </div>
+      <div class="col-75">
+        <select id="filename_indi" name="filename_indi">
+          
+        </select>
+      </div>
+             
+    </div> <br>
+    
+    <div class="row">
+      <input type="submit" value="Submit">
+    </div>         
+               
+    </form><br><br>
+    
+                
+                
+</div><br><br>
+                
+<p class = "getDesTitle" id = "getDesTitle"><strong>Get Descendants</strong></p>
+                
+<div id = "getDesc">
+                
+    <form  name = "form3"  id = "myId">
+    <div class="row">
+      <div class="col-25">
+        <label for="fname">First Name</label>
+      </div>
+      <div class="col-75">
+        <input type="text" id="fnameDesc" name="firstname_desc" placeholder="First Name.." method = "POST">
+      </div>
+        <div id = "first_name_desc_error"></div>  
+    </div>
+               
+      <div class="row">
+      <div class="col-25">
+        <label for="lname">Last Name</label>
+      </div>
+      <div class="col-75">
+        <input type="text" id="lnameDesc" name="lastname_desc" placeholder="Last Name.." method = "POST">
+      </div>
+        <div id = "last_name_desc_error"></div>
+    </div>
+        
+    <div class="row">
+        <div class="col-25">
+        <label for="lname">Max Gen</label>
+        </div>
+        <div class="col-75">
+        <input type="text" id="maxGenDesc" name="maxGen_desc" placeholder="Max Gen (0 and up).." method = "POST">
+      </div>
+        <div id = "maxGen_desc_error"></div>
+    </div>
+               
+    
+       <div class="row">
+      <div class="col-25">
+        <label for="country">File Name</label>
+      </div>
+      <div class="col-75">
+        <select id="filename_indi11" name="filename_indi">
+          
+        </select>
+      </div>
+             
+    </div> <br><br>
+    <div class="row">
+      <input type="submit" value="Submit">
+    </div>       
+               
+    </form><br><br>
+    
+   <table  id="customers_1" align = "center" height = "200%" width = "100%">
+  <thead>
+    <th>Individuals</th>
+    <th>Generation Number</th>
+      
+  </thead>
+  
+    </table>
+              
+                
+</div><br><br>
+                
+<p class = "getAncestorsTitle"><strong>Get Ancestors</strong></p>
+    <div class = "getAncestors-container">
+         <form method = "POST" id = "myId2" name = "form4" >
+    <div class="row">
+      <div class="col-25">
+        <label for="fname">First Name</label>
+      </div>
+      <div class="col-75">
+        <input type="text" id="fnameAnc" name="firstname_anc" placeholder="First Name.." >
+      </div>
+        <div id = "first_name_anc_error"></div>  
+    </div>
+               
+      <div class="row">
+      <div class="col-25">
+        <label for="lname">Last Name</label>
+      </div>
+      <div class="col-75">
+        <input type="text" id="lnameAnc" name="lastname_anc" placeholder="Last Name.." >
+      </div>
+        <div id = "last_name_anc_error"></div>
+    </div>
+        
+    <div class="row">
+        <div class="col-25">
+        <label for="lname">Max Gen</label>
+        </div>
+        <div class="col-75">
+        <input type="text" id="maxGenAnc" name="maxGen_anc" placeholder="Max Gen (0 and up).." >
+      </div>
+        <div id = "maxGen_anc_error"></div>
+    </div>
+               
+    
+       <div class="row">
+      <div class="col-25">
+        <label for="country">File Name</label>
+      </div>
+      <div class="col-75">
+        <select id="filename_indi2" name="filenameAnc">
+          
+        </select>
+      </div>
+             
+    </div> <br><br>
+    <div class="row">
+      <input type="submit" value="Submit">
+    </div>       
+               
+    </form><br><br>
+                     
+   <table  id="customers_2" align = "center" height = "200%" width = "100%">
+  <thead>
+    <th>Individuals</th>
+    <th>Generation Number</th>
+      
+  </thead>
+  
+    </table>     
+                
+    </div>
+                     
+                
+            </div>
+            
+                   
+        
+        </div>
+        
+             
+        
+        
+        </div>
+    <br>
+    
+    <br>
+    
+</body>
+</html>
+
+
+
+
+
+
+
+
+
+
+
